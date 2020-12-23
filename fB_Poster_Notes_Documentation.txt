@@ -1,0 +1,229 @@
+# Read in important scheduling info
+# current date and time; Getting my bearings... K.Spohn
+# now = datetime.now() 
+# weekday = now.strftime("%A")
+# print("Weekday:", weekday)
+# year = now.strftime("%Y")
+# print("Year:", year)
+# month = now.strftime("%B")
+# print("Month(January,...,December):", month)
+# day = now.strftime("%-d")
+# print("Day(1-30):", day)
+# time = now.strftime("%-I:%M:%S")
+# print("Time:", time)
+# am_pm = now.strftime("%p")
+# print("Current 12 Hr. Locale(AM, PM):"+ am_pm)
+# date_time = now.strftime("%-m/%-d/%Y, %-I:%-M:%-S %p")
+# print("Date and Time:",date_time)	
+
+
+  #For Specific elements, if they change on the FB website, alter 
+       # the selenium-based extraction/ interaction queries herein...
+         
+       # send to the input element below the simple query 
+       # 'UNOTaku Anime Club', and click the button by code 
+       # button-click/press
+       
+       # feeding in data send keys -> element below: 
+       # <input type="text" class="_1frb" name="q" 
+       # value="UNOtaku Anime Club" autocomplete="off" placeholder
+       # ="Search" data-lpignore="true" data-testid="search_input" 
+       # role="combobox" aria-label="Search" aria-autocomplete="list" 
+       # aria-expanded="true" aria-controls="typeahead_list_u_0_6" 
+       # id="js_a">
+
+        # Submit Button Element, Simple Search FB Search Bar: 
+        # <button value
+        # ="1" class="_42ft _4jy0 _4w98 _4jy3 _517h _51sy _4w97" 
+        # aria-label="Search" tabindex="-1" data-testid=
+        # "facebar_search_button" type="submit"><i class="_585_">
+        # </i></button>
+
+        # Convert URL by button press to UNOTaku Anime Club Main Feed
+        # a href element blank class Element: 
+    
+        # <a class="" href="/profile.php?id=202429979777139&amp;ref=br_rs">
+        # UNOtaku Anime Club</a>
+                 
+        # 'Posts' Button 'Guest User' Feed: 
+    
+        #<a class="_484w scrollAreaColumn" 
+        # href="/UNOtaku.club/posts/?ref=content_filter&amp;mt_nav=0&amp;refid=17" 
+        # style="min-width: 8%" 
+        # id="u_1g_9"><span class="_6zf">Posts</span></a>      
+
+            # WRITE SOMETHING Tag
+
+            # <div class="_rm7 _2s20" data-store=
+            # "{&quot;action&quot;:&quot;\/a\/home.php?av=202429979777139&amp;eav=
+            # AfbiPlPp3bKa_WoDHjnSRRwR7IYYbe3lxmhrnef9csuU2T9UFeKWmV0GtNH8SfzY-78
+            # &quot;,&quot;actor_id&quot;:&quot;202429979777139&quot;
+            #,&quot;button_text_submit&quot;:&quot;Save&quot;,&quot;composertitle&quot;
+            # :&quot;Update Status&quot;,&quot;disable_people_tags&quot;:true,&quot;
+            # inputname&quot;:&quot;status&quot;,&quot;max_photos_allowed&quot;:80
+            # ,&quot;placeholder&quot;:&quot;Write something...&quot;,&quot;
+            # showposttypeselector&quot;:true,&quot;targetid&quot;:&quot;
+            # 202429979777139&quot;,&quot;disable_album_info&quot;:true,&quot;
+            # disable_slideshow&quot;:false}" data-sigil=
+            # "write_post_admin show_composer page_post_button" data-store-id=
+            # "156"><div class="_2ph_"><i class="img profpic" aria-label=
+            # "UNOtaku Anime Club, profile picture" role="img" 
+            # style="background:#d8dce6 url(
+         
+            #'https\3a //scontent-dfw5-2.xx.fbcdn.net/v/t1.0-1/cp0/e15/q65/p100x100/
+            #20799551_1657991267554329_2353612417968304074_n.jpg?_nc_cat\3d 100\26 ccb\3d 2\
+            #26 _nc_sid\3d dbb9e7\26 efg\3d eyJpIjoidCJ9\26 _nc_ohc\3d zSUxcUS4_6sAX_odTeR\
+            #26 _nc_ht\3d scontent-dfw5-2.xx\26 tp\3d 3\26 oh\3d dfb89ba9a8939258f7be57e564bf5e42\
+            #26 oe\3d 5FF4CD2F') no-repeat center; background-size:100% 100%;
+            #-webkit-background-size:100% 100%;width:30px;height:30px;"></i>
+            
+            #<span class="_52j9 _2pis">Write something...</span></div></div>
+
+            #WRITE SOMETHING TextArea Element: 
+
+            # <textarea class="_5whq input composerInput" 
+            # aria-label="Write something..." 
+            # rows="1" data-store="{&quot;defaultvalue&quot;:&quot;&quot;}" 
+            # name="status" placeholder="Write something..." id="u_o_1n" 
+            # data-sigil="m-textarea-input composer-textarea" data-autoid="autoid_112" 
+            # spellcheck="false" style=""></textarea>
+
+            # Send a message to the TextArea element. 
+            
+            # In the Update Status Button php webpage embedded,
+            # Use the Button '...' to schedule the specific date-time 
+            # based on the current dt element in array.              
+
+
+            # Schedule Button: 
+            #internal HTML id values mutate after each use, so extract based on the format 
+            # and the class/ data-sigil ->  
+            # <label class="_5aqb touchable _skt" 
+            # data-sigil="content_type_scheduled 
+            # touchable" data-autoid="autoid_143">
+            # <div class="_55wr _7om2 _52we _5f2a _5xou">
+            # <div class="_4g34"><div class="_3-99">
+            # <span class="_52je _52jb">Schedule</span></div></div>
+            # <div class="_5s61 _5f2b" style="align-self:flex-start; 
+            # margin-top: 20px;" id="m_check_list_aria_label"> 
+            # <input aria-labelledby="m_check_list_aria_label" 
+            # class="_6j53" type="radio" value="1" 
+            # name="unpublished_content_type"><div class="_5f26">
+            # </div></div></div></label>
+
+            # Send keys keystroke on click event for label element Schedule button, 
+            # such that it triggers event for the EventListener assumed to be embedded...
+            
+            # Ditto goes for elements below, but where option payloads correspond to date-time 
+            # object's parameters...  
+
+            # Example code from JAVA Selenium Driver, derived from StackOverflow URL: 
+            # https://stackoverflow.com/questions/36399205/match-text-in-table-and-click-on-it-using-selenium-webdriver
+            
+            #EXAMPLE CODE by USER 'edulient' (i):  
+            # driver.get(yourWebPageLInk); // link to your web-table web page
+            # /* take all of the element under Column "State" inside list*/
+            # List<WebElement> columVal =  driver.findElements(By.xpath(
+            # "//*[starts-with(@id,'TicketID_')]/td[7]/div"));
+            # /*count the size of the list to match with the size of the column state* 
+            # System.out.println("Size of the contents in the column state is : " +columVal.size());
+            # /*now for matching one of the content and then performing some action please start a for loop */
+            # String oneVal = "closed successful";
+            #for(int i=0;i<columVal.size();i++){
+            #System.out.println("Content text is : " + columVal.get(i).getText());
+            # /*match the content here in the if loop */
+            # if(columVal.get(i).getText().equals(oneVal)){
+            # /*perform action*/ columVal.get(i).click(); } }
+            
+            #2. String text = "someText";
+            # driver.findElement(By.cssSelector("div:contains('" + text + "')")).click();
+            # (OR) String text = "someText";
+            # driver.findElement(By.xpath("//div[contains(text(), '" + text + "')]")).click();
+            # I, Kevin S., am partial to Method no. 2...
+            
+            # Performing a Similar Algorithm for Python ...
+
+            #Schedule Month: 
+
+            # <select name="schedule_time_selector_date_month" 
+            # prefix="schedule_time_selector_date" data-sigil=
+            # "schedule_time_selector_date_month"><option value="1">January</option>
+            # <option value="2">February</option><option value="3">March</option>
+            # <option value="4">April</option><option value="5">May</option>
+            # <option value="6">June</option><option value="7">July</option>
+            # <option value="8">August</option><option value="9">September</option>
+            # <option value="10">October</option><option value="11">November</option>
+            # <option value="12" selected="1">December</option></select>
+
+            # Schedule Date: Day
+            # <select name="schedule_time_selector_date_day" prefix=
+            #"schedule_time_selector_date" data-sigil="schedule_time_selector_date_day">
+            # <option value="1">1</option><option value="2">2</option>
+            # <option value="3">3</option><option value="4">4</option>
+            # <option value="5">5</option><option value="6">6</option>
+            # <option value="7">7</option><option value="8">8</option>
+            # <option value="9" selected="1">9</option><option value="10">10</option>
+            # [...] 
+            # <option value="29">29</option><option value="30">30</option>
+            # <option value="31">31</option></select> 
+
+      # Schedule Date: Year
+      # <select name="schedule_time_selector_date_year" 
+      # prefix="schedule_time_selector_date" 
+      # data-sigil="schedule_time_selector_date_year">
+
+      #HTML Tags as of end of year 2020: 
+      # <option value="2020" selected="1">2020</option>
+      # <option value="2021">2021</option>
+      # </select>
+
+      # Schedule Time: Hours(AM/PM)
+      # <select name="schedule_time_selector_time_hours" 
+      # data-sigil="schedule_time_selector_time_hours">
+      # <option value="1">1</option><option value="2">2</option>
+      # <option value="3">3</option><option value="4">4</option>
+      # <option value="5">5</option><option value="6">6</option>
+      # <option value="7">7</option><option value="8">8</option>
+      # <option value="9">9</option><option value="10">10</option>
+      # <option value="11">11</option><option value="12" selected="1">12</option>
+      # </select>
+
+      # Select Time: Minutes(5 min intervals):
+      # <select name="schedule_time_selector_time_minutes" 
+      # data-sigil="schedule_time_selector_time_minutes">
+      # <option value="0">00</option><option value="5">05</option>
+      # <option value="10">10</option><option value="15">15</option>
+      # <option value="20">20</option><option value="25">25</option>
+      # <option value="30">30</option><option value="35">35</option>
+      # <option value="40" selected="1">40</option><option value="45">45</option>
+      # <option value="50">50</option><option value="55">55</option></select>
+
+      # Select Time: AM/PM Selector (Mod 12):
+
+      # <select name="schedule_time_selector_time_am_pm" 
+      # data-sigil="schedule_time_selector_time_am_pm">
+      # <option value="0">AM</option>
+      # <option value="1" selected="1">PM</option></select>
+
+      # Done Button: Terminates payload message as keys...
+      # <button type="button" value="Done" 
+      # class="_54k8 _52jd _419z _2z9s" data-sigil=
+      # "touchable structured-composer-post-type-selector-done" 
+      # data-autoid="autoid_105"><span class="_55sr">Done</span></button>
+
+      # Schedule Button: 
+      # <button type="submit" value="Post" 
+      # class="_54k8 _52jd _419z _2z9s" 
+      # data-sigil="touchable submit_composer">Schedule</button>
+      
+      # Auto fills CST for Timezone data below FB surface Infrastructure code...
+      
+      # DONE Button-Click/ Key-Press
+      # <button type="button" value="Done" class="_54k8 _52jd _419z _2z9s" 
+      # data-sigil="touchable structured-composer-post-type-selector-done" 
+      # data-autoid="autoid_139"><span class="_55sr">Done</span></button>
+
+
+
+
+

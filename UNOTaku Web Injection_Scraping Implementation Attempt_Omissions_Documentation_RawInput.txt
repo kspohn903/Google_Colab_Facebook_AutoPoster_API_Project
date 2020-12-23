@@ -1,0 +1,13 @@
+Web Scraper Raw Input Omission: 
+ # print(f"Hi UNOTaku Admin.\nI am a Web Extractor Bot...\nMy name is" +  
+    #       f"Richard, yes...\n")
+    
+    # endIdx = raw_input('How many webpages, including the 1st'\ 
+    # '[...]/topanime.php? request, do you need for extraction...?\n'\ 
+    # 'Please choose an integer, n+1, so that I may be able to help you...\n')
+    
+    # while (type(query) is not int or query is None): 
+    #       endIdx = raw_input('I repeat, how many webpages, including the 1st'\ 
+    #       ' [...]/topanime.php? request, do you need for extraction?\n'\ 
+    #       ' Please choose an integer, n+1, (Ex: 1-50) so that I may be able'\ 
+    #       ' to better help you.\n')

@@ -1,0 +1,169 @@
+
+# 1st Webpage for scraping...  
+# Next php webpages: (i = [0,2799]) 
+# https://myanimelist.net/topanime.php?limit=(50*i+50) 
+
+# If anyone complains, then you can manually alter it to include the following licensors:
+# ['CrunchyRoll', 'Funimation', 'Amazon Prime Video', 'Netflix', 'Hulu']... You Get the idea... 
+
+# From 'myanimelist[...].php', get all element links from 
+# the elements, as follows: 
+
+# j-th index iterates the rows arr to patch each rows.append(engTitleArr, jpnTitleArr, sources, 
+# synopsisTextArr, lastEpisode ,altTitlesArr), whereas 
+# idx iterates as index for all arrays patching 
+# for idx, link in .find_all('elem 1 > elem 2> elem 3 > elem 4 > elem 5', ['attr 1', 'attr 2', ..., 'attr n']): 
+# urlArr.append(link)
+
+# i.e. for all anime title tags of the form 'myanimelist.net/anime/%d/%s' % (toolTipID, animeTitle_IN_URL)
+# idx = 0 # /* converter arr for all elems as index parsing thru each particular dataset: 
+# synopsisText.length, engTitlesArr.length = 1 ; synopsisTextArr = b; 
+# where j = {[1,...n]} on closed bounds [a=0,b=n].*/ 
+
+ #               /* ... fill in corresponding elements here that aren't 'JPN Title' elements using 
+   #               currentSoup.find_all:*/  
+   #               /*Step 1: */
+   #               /* Change the two elements above needed to extract html data from BeautifuleSoup-based 
+   #               webpages, and collect the info for the url as a string, append to arr of
+   #               URL's and extract data current_soup as a new tab, */
+   #               /* Using Beautiful Soup Element Form(Example):  
+   #               Top element on each webpage: 
+   #               <h3 class="hoverinfo_trigger fl-l fs14 fw-b anime_ranking_h3">
+   #               <a href="https://myanimelist.net/anime/5114/Fullmetal_Alchemist__Brotherhood" 
+   #               id="#area5114" rel="#info5114">Fullmetal Alchemist: Brotherhood</a></h3> */
+   
+   #               /* Secondary Elements on each webpage Element(Example: Steins;Gate):
+   #               Get the HREF from the td class = "title al va-t word-break" > 
+   #                a class ="hoverinfo_trigger fl-l ml12 mr8" style = "position: relative;"
+   
+   #               Return from each lateral title that is filtered
+   #               <span itemprop="genre" style="display: none">
+   #               Adventure</span><a href="/anime/genre/2/Adventure" title="Adventure"> Adventure</a>,
+   
+   #               <span itemprop="genre" style="display: none">Fantasy</span>
+   #                <a href="/anime/genre/10/Fantasy" title="Fantasy">Fantasy</a>,     
+   #                <span itemprop="genre" style="display: none">Historical</span>
+   #                <a href="/anime/genre/13/Historical" title="Historical">Historical</a>, */    
+   #                [... AnimeGenresInTitle] 
+  
+        # This Element HERE ->: 
+        # <td class="title al va-t word-break">
+        # <a class="hoverinfo_trigger fl-l ml12 mr8" href=
+        # "https://myanimelist.net/anime/[...]" id="#area%d" 
+        # rel="#info%d" style="position: relative;">
+
+        # <img width="50" height="70" alt="Anime: Steins;Gate" class=" lazyloaded" border="0" 
+        # data-src=
+        # "https://cdn.myanimelist.net/r/50x70/images/anime/5/73199.webp?s=88a9e53d067a524ad1b84e49e13a270a" 
+        # data-srcset=
+        # "https://cdn.myanimelist.net/r/50x70/images/anime/5/73199.webp?s=88a9e53d067a524ad1b84e49e13a270a 
+        # 1x, https://cdn.myanimelist.net/r/100x140/images/anime/5/73199.webp?s=8ee59e1c8ac81eba9d3a883afd73208b 
+        # 2x" srcset=
+        # "https://cdn.myanimelist.net/r/50x70/images/anime/5/73199.webp?s=88a9e53d067a524ad1b84e49e13a270a 
+        # 1x, 
+        # https://cdn.myanimelist.net/r/100x140/images/anime/5/73199.webp?s=8ee59e1c8ac81eba9d3a883afd73208b 
+        # 2x" 
+        # src="https://cdn.myanimelist.net/r/50x70/images/anime/5/73199.webp?s=88a9e53d067a524ad1b84e49e13a270a">
+        # </a>
+   
+        # Step 2. get the link, and click it to go to that title for as many as index variables will allow. 
+        # 2(i): ENG Title: Example (FMAB)
+        # <div class="spaceit_pad">
+        # <span class="dark_text">English:</span> Fullmetal Alchemist: Brotherhood
+        # </div>
+ 
+        # 2(ii). Title, JPN Title, ALT Titles:
+  
+        # Elements:
+        # for all remaining elements in list of extracted elements describing these criteria:  
+ 
+        # <div id="contentWrapper" itemscope="" itemtype="http://schema.org/TVSeries"><div>
+        # <div class="h1 edit-info">
+        # <div class="h1-title"><div itemprop="name">
+        # <h1 class="title-name h1_bold_none"><strong>Gintama'</strong></h1>
+        # <br><p class="title-english title-inherit">Gintama Season 2</p></div></div><div class="header-right">
+        # header_title: div id = "contentWrapper" itemscope = "" ... div > 
+        # div class = "h1 edit-info" > div class = "h1-title" ... and down the rabbit hole for the titles we go...
+
+        # set them as primaryTitle, secondaryTitle  
+        # scrub primaryTitle, secondaryTitle of (regex= 'non-word, non-digit character for 1st character, and/or end
+        # and I don't know it...PLEASE HELP' )
+        # and compare if tag Japanese exists and is a string (isParsable -> i.e. in Hepburn), straight convert 
+        # the text in the subsequent 
+        # div -> <span tag /> -> !HERE:___ <></div>
+        # titleNameHERE in tag order ___! to the title. Else, use the first element in either 
+        # (Alternative Titles, Synonyms as text in tags of the below div > <span/> ) -> strong span div ->  sequence   
+ 
+        # [Japanese: name if it exists in title, this tag, Synonyms, Alternative Titles: -> JPN Name = 
+        # Synonyms[0]/ altTitlesArr[0] 
+        # if Japanese tag is empty, and populate ALT Titles arr as the rest of Synonyms .text() payload ]
+ 
+        # <div class="spaceit_pad">
+        # <span class="dark_text">Synonyms:</span> Hagane no Renkinjutsushi: 
+        # Fullmetal Alchemist, Fullmetal Alchemist (2009), FMA, FMAB
+        # </div> 
+        # Create array of alt names: 
+ 
+        #2(iii). Synopsis Text: tbody > tr > p itemprop = "description"
+
+        # Step 3. get the synopsis, and alt. title elements, as follows: 
+
+        #ON EACH WEBSITE SCRAPING FOR ELEMENTS IN LIST: 
+        #(i,ii). ENG. Title, JPN Title: 
+
+        # <div id="synopsis" class="synopsis-text">
+        # <p class="fs16 lh22 tsynopsis-text" itemprop="description"> -> Synopsis Text Here...
+ 
+        # (iv). Description: <p class="fs16 lh22 tsynopsis-text" itemprop="description">Synopsis Text Here</p> ->
+        # Extract Synopsis Text 
+        # (v). Assume Ep: 0, or leave blank.
+ 
+        #Step 4. Toggle browser to Return to 1st tab page back, once done with title, to 
+        #  'https://myanimelist.net/topanime.php' for the 1st 49 others, then 
+         
+        # so long as there exist anime titles in the list (i.e. there exist <a href= 'myanimelistTitleURLHERE' 
+        # id = '#area%d' rel = '#info%d'>Anime Title Name HERE</a> elements with semi-unique identifiers). 
+        # .toString()) ). */
+        #               if 'span tag > strong'.text() == 'Japanese Title': 
+        #                   jpnTitleArr.append( [...].text())
+        #               else:
+        #                   jpnTitleArr.append([... Alternative Titles > Synonyms el that has either 
+        #                   *Hepburn/ Romanji Text/ JPN lang])*
+        #                   rows.append(/* ...All DATA EXTRACTED AS JAGGED ARRAY STRING TO FIT TO FORM, 
+        #                   SEPARATED BY 4 SPACES BEYOND THE 1st COL*/)
+        #       else: 
+        #               continue *OR Python Equivalent*
+        #       *RESET the toolTip/ specAnimeTitleURL*
+        #       toolTipID = 0
+        #       specAnimeTitleURL = "" 
+
+        
+		# /* *NOTE*: For subsequent uses of web page crawler, web scraper/ spyder algorithm, one can extract data that 
+		# isn't contained in the previously extracted data and can continue onwards to i = [14000, Math.INFINITY), ... 
+		# Should be able to both patch old ranking lists / update it for  all subsequent uses... 
+		# Just modify the index to value and 
+		# for all I care. However, if you crash your browser going infinite, shut it down and set to a countable 
+		# dur./ no. instead. 
+		# If Little Timmy gets stuck in a well, I'm not Lassie, and won't go get help... */ 
+		
+		# blob = """We will meet at eight o'clock on Thursday morning."""
+        # text = Text(blob)
+        # We can also specify language of that text by using
+        # text = Text(blob, hint_language_code='en')
+        # Lang detection, and appending the tokenized string to JPN Title Arr... (?)
+        # Append the 1st JPN/ Hepburn element to jpnTitleArr, then append all 
+        # residual elements throughout for loop to altTitlesArr
+		
+		
+
+ # Step 5. Save these elements as an array, and read to *.csv file 
+ # 'web_Scraper_UNOTaku_Anime_Club_Edit_Anime_List.csv' with access permissions 'w+' (Write/ 
+ # Override when necessary), and write to csv file in string-based array format with the 
+ # 1st row elements [ ['ENG Title Name', 'JPN Title Name', 'Location', 'Synopsis', 'Last Episode', 'ALT Title Names'], 
+ # ... ]. 
+ 
+ # Next, save to the *.csv file, for use in 'post_to_UNOTaku_Anime_Club_Title_Submissions.py' doing 'w+' permissions. 
+ # Step 6. When all of the above has been successfully completed, close all web browser(s)/ web-pages, 
+ # if opened using Selenium.
+
+
